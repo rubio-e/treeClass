@@ -33,7 +33,7 @@ treeCl <- function(formula, data, deep = NULL) {
 
     datax = data.frame(datax[,c(2:ncol(datax),1)])
 
-    dataz = bestSplits(datax)
+    dataz = bestSplit(datax)
 
     dataa = dataz[[1]]
 

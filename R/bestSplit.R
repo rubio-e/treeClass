@@ -7,10 +7,10 @@
 #' @return list
 #'
 #' @examples
-#' bestSplits(iris)
+#' bestSplit(iris)
 #'
 #' @export
-bestSplits<-function(z){
+bestSplit<-function(z){
 
   y = z[,ncol(z)]
 
