@@ -10,7 +10,7 @@ bestSplit(z)
 \item{z}{data base where the last column is the dependent variable}
 }
 \value{
-list
+list with a data.frame called base, the best GINI index, the split value and the variable with the best split
 }
 \description{
 This function makes splits among columns, computes the GINI index a espefic split and select the lowest.

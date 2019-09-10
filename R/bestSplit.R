@@ -4,7 +4,7 @@
 #'
 #' @param z data base where the last column is the dependent variable
 #'
-#' @return list
+#' @return list with a data.frame called base, the best GINI index, the split value and the variable with the best split
 #'
 #' @examples
 #' bestSplit(iris)
@@ -46,7 +46,7 @@ bestSplit<-function(z){
 
       yz = yz[,c(2:ncol(yz), 1)]
 
-      yz = list(base = yz,G = bbs[1,1],splitVal = bbsa[1,1])
+      yz = list(base = yz,G = bbs[1,1],splitVal = bbsa[1,1], variable = name)
 
 
     }else{
@@ -60,7 +60,7 @@ bestSplit<-function(z){
 
       yz = yz[,c(2:ncol(yz), 1)]
 
-      yz = list(base = yz,G = bbs[1,1],splitVal = bbsa[1,1])
+      yz = list(base = yz,G = bbs[1,1],splitVal = bbsa[1,1], variable = name)
 
     }
 
@@ -82,7 +82,7 @@ bestSplit<-function(z){
       yz = as.data.frame(cbind(yz[,-c(ncol(yz)-1)],z[,ncol(z)]))
       colnames(yz)[ncol(yz)] = colnames(z)[2]
 
-      yz = list(base = yz,G = splitOne[1,2],splitVal = splitOne[1,1])
+      yz = list(base = yz,G = splitOne[1,2],splitVal = splitOne[1,1], variable = colnames(z)[1])
 
 
     }else{
@@ -96,7 +96,7 @@ bestSplit<-function(z){
       yz = as.data.frame(cbind(yz[,-c(ncol(yz)-1)],z[,ncol(z)]))
       colnames(yz)[ncol(yz)] = colnames(z)[2]
 
-      yz = list(base = yz,G = splitOne[1,2],splitVal = splitOne[1,1])
+      yz = list(base = yz,G = splitOne[1,2],splitVal = splitOne[1,1], colnames(z)[1])
 
 
     }
