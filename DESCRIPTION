@@ -4,7 +4,7 @@ Title: Classification tree
 Version: 0.1.0
 Author: Ernesto Rubio and Aleksi Tavkhelidze 
 Maintainer: The package maintainer <ernestorub@gmail.com>
-Description: treeClassi is a package for data classification based on GINI index.
+Description: treeClass is a package for data classification based on GINI index.
 Imports: data.tree
 License: GPL-2
 Encoding: UTF-8
