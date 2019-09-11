@@ -6,20 +6,20 @@
 #'
 #' @param data data base
 #'
-#' @param deep Numeric value to indicate the deep of the tree
+#' @param depth Numeric value to indicate the depth of the tree
 #'
 #' @return tree object
 #'
 #' @examples
 #'
-#' treeCl(Species~Petal.Width+Petal.Length+Sepal.Width,data = iris, deep = 3)
+#' treeCl(Species~Petal.Width+Petal.Length+Sepal.Width,data = iris, depth = 3)
 #'
-#' myTree <- treeCl(Species~Petal.Width+Petal.Length+Sepal.Width,data = iris, deep = 3)
+#' myTree <- treeCl(Species~Petal.Width+Petal.Length+Sepal.Width,data = iris, depth = 3)
 #'
 #' plot(myTree)
 #'
 #' @export
-treeCl <- function(formula, data, deep = NULL) {
+treeCl <- function(formula, data, depth = NULL) {
 
   loopColsE = function(node, formula, data, counter = 0) {
 
@@ -101,7 +101,7 @@ treeCl <- function(formula, data, deep = NULL) {
         }
 
 
-        if(cuenta == deep){
+        if(cuenta == depth){
           hijo = node$AddChild(names(which.max(tabla)))
           hijo$nElements <- nrow(nData[[i]])
           # hijo <- node$AddChild(unique(dataa[, ncol(dataa)]))
