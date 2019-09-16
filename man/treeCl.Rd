@@ -4,14 +4,14 @@
 \alias{treeCl}
 \title{treeCl function}
 \usage{
-treeCl(formula, data, deep = NULL)
+treeCl(formula, data, depth)
 }
 \arguments{
 \item{formula}{Formula to define the dependent and independent varibles}
 
 \item{data}{data base}
 
-\item{deep}{Numeric value to indicate the deep of the tree}
+\item{depth}{Numeric value to indicate the depth of the tree}
 }
 \value{
 tree object
@@ -21,9 +21,9 @@ This function uses several functions to build a tree based on data
 }
 \examples{
 
-treeCl(Species~Petal.Width+Petal.Length+Sepal.Width,data = iris, deep = 3)
+treeCl(Species~Petal.Width+Petal.Length+Sepal.Width,data = iris, depth = 3)
 
-myTree <- treeCl(Species~Petal.Width+Petal.Length+Sepal.Width,data = iris, deep = 3)
+myTree <- treeCl(Species~Petal.Width+Petal.Length+Sepal.Width,data = iris, depth = 3)
 
 plot(myTree)
 

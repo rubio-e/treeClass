@@ -92,7 +92,7 @@ sspf<-function(y,x){
 
     giniG = giniG[order(giniG[,7]),]
 
-    giniG = data.frame(bSplit = giniG[1,2], G = giniG[1,7], n1 = giniG[1,3], n2= giniG[1,4])
+    giniG = data.frame(bSplit = giniG[1,2], G = giniG[1,7])
 
     return(giniG)
 

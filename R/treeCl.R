@@ -19,7 +19,7 @@
 #' plot(myTree)
 #'
 #' @export
-treeCl <- function(formula, data, depth = NULL) {
+treeCl <- function(formula, data, depth) {
 
   loopColsE = function(node, formula, data, counter = 0) {
 
@@ -87,7 +87,7 @@ treeCl <- function(formula, data, depth = NULL) {
           break
         }
 
-        if(nrow(nData[[i]])<=1){
+        if(nrow(nData[[i]])<=3){
           hijo = node$AddChild(names(nData)[i])
           hijo = node$AddChild(names(which.max(tabla)))
           hijo$nElements <- nrow(nData[[i]])
@@ -122,7 +122,7 @@ treeCl <- function(formula, data, depth = NULL) {
 
   loopColsE(tree, formula, data)
 
-  print(tree,"nElements","Elements","ElementsProp")
+  print(tree,"nElements")
 
   return(tree)
 
