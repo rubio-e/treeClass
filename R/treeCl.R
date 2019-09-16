@@ -1,10 +1,10 @@
 #' treeCl function
 #'
-#' This function uses several functions to build a tree based on data
+#' This function uses several functions to build a classification tree based on data
 #'
 #' @param formula Formula to define the dependent and independent varibles
 #'
-#' @param data data base
+#' @param data database
 #'
 #' @param depth Numeric value to indicate the depth of the tree
 #'

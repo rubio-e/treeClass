@@ -1,10 +1,10 @@
 #' sspf function
 #'
-#' This function makes splits, computes the GINI index a espefic split and select the lowest.
+#' This function splits the independent variable and computes the weighted GINI index by selecting the lowest.
 #'
-#' @param y Factor
+#' @param y Factor vector
 #'
-#' @param x vector
+#' @param x vector: it can be numeric, character or factor
 #'
 #' @return data.frame
 #'

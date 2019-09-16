@@ -2,7 +2,7 @@
 #'
 #' This function computes the entropy.
 #'
-#' @param x Factor
+#' @param x Factor vector
 #'
 #' @return Numeric variable.
 #'

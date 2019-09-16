@@ -4,7 +4,7 @@
 #'
 #' @param x Factor vector
 #'
-#' @return string
+#' @return character variable
 #'
 #' @examples
 #' purity(iris$Species)
