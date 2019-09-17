@@ -7,7 +7,7 @@
 entropy(x)
 }
 \arguments{
-\item{x}{Factor}
+\item{x}{Factor vector}
 }
 \value{
 Numeric variable.

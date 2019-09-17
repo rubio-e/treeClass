@@ -9,7 +9,7 @@ treeCl(formula, data, depth)
 \arguments{
 \item{formula}{Formula to define the dependent and independent varibles}
 
-\item{data}{data base}
+\item{data}{database}
 
 \item{depth}{Numeric value to indicate the depth of the tree}
 }
@@ -17,7 +17,7 @@ treeCl(formula, data, depth)
 tree object
 }
 \description{
-This function uses several functions to build a tree based on data
+This function uses several functions to build a classification tree based on data
 }
 \examples{
 

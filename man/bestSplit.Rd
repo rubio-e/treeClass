@@ -7,13 +7,13 @@
 bestSplit(z)
 }
 \arguments{
-\item{z}{data base where the last column is the dependent variable}
+\item{z}{database where the last column is the dependent variable}
 }
 \value{
 list with a data.frame called base, the best GINI index, the split value and the variable with the best split
 }
 \description{
-This function makes splits among columns, computes the GINI index a espefic split and select the lowest.
+This function makes splits among columns, computes the GINI index a espefic split and select the column with the lowest GINI.
 }
 \examples{
 bestSplit(iris)

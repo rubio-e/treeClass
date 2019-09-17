@@ -10,7 +10,7 @@ purity(x)
 \item{x}{Factor vector}
 }
 \value{
-string
+character variable
 }
 \description{
 This function defines if a vector is pure
