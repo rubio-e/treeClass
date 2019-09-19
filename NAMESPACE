@@ -3,7 +3,6 @@
 export(bestSplit)
 export(entropy)
 export(gini)
-export(purity)
 export(sspf)
 export(treeCl)
 import(data.tree)

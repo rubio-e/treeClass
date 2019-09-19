@@ -10,93 +10,93 @@
 #' bestSplit(iris)
 #'
 #' @export
-bestSplit<-function(z){
+bestSplit <- function(z){
 
-  y = z[,ncol(z)]
+  y <- z[,ncol(z)]
 
-  z1 = z[,-ncol(z)]
+  z1 <- z[,-ncol(z)]
 
-  if(ncol(z)>2){
+  if(ncol(z) > 2){
 
-    bbs = data.frame()
+    bbs <- data.frame()
 
     for (i in 1:length(z1)) {
-      bbs[1,i] = sspf(y,z1[,i])[2]
+      bbs[1,i] <- sspf(y,z1[,i])[2]
     }
 
-    colnames(bbs) = names(z1)
+    colnames(bbs) <- names(z1)
 
-    bbs = bbs[,order(bbs[1,])]
+    bbs <- bbs[,order(bbs[1,])]
 
-    name = as.character(colnames(bbs)[1])
+    name <- as.character(colnames(bbs)[1])
 
-    bbsa = sspf(y,z1[,name])[1]
+    bbsa <- sspf(y,z1[,name])[1]
 
-    yz = data.frame(cbind(y,z1))
+    yz <- data.frame(cbind(y,z1))
 
-    yz = na.omit(yz)
+    yz <- na.omit(yz)
 
-    if(is.numeric(bbsa[1,1])){
+    if(is.numeric( bbsa[1,1]) ){
 
-      yz$splitF = ifelse(yz[,name] >= bbsa[1,1],
+      yz$splitF <- ifelse(yz[,name] >= bbsa[1,1],
                          paste(name,">=",bbsa[1,1]),
                          paste(name,"<",bbsa[1,1]))
 
-      colnames(yz)[1] = colnames(z)[ncol(z)]
+      colnames(yz)[1] <- colnames(z)[ncol(z)]
 
-      yz = yz[,c(2:ncol(yz), 1)]
+      yz <- yz[,c(2:ncol(yz), 1)]
 
-      yz = list(base = yz,G = bbs[1,1],splitVal = bbsa[1,1], variable = name)
+      yz <- list(base = yz,G = bbs[1,1],splitVal = bbsa[1,1], variable = name)
 
 
     }else{
-      allFactors = unique(yz[,name])
+      allFactors <- unique(yz[,name])
 
-      yz$splitF = ifelse(yz[,name] == bbsa[1,1],
+      yz$splitF <- ifelse(yz[,name] == bbsa[1,1],
                          as.character(bbsa[1,1]),
                          paste(allFactors[allFactors!=bbsa[1,1]],collapse = ","))
 
-      colnames(yz)[1] = colnames(z)[ncol(z)]
+      colnames(yz)[1] <- colnames(z)[ncol(z)]
 
-      yz = yz[,c(2:ncol(yz), 1)]
+      yz <- yz[,c(2:ncol(yz), 1)]
 
-      yz = list(base = yz,G = bbs[1,1],splitVal = bbsa[1,1], variable = name)
+      yz <- list(base = yz,G = bbs[1,1],splitVal = bbsa[1,1], variable = name)
 
     }
 
 
   }else{
 
-    splitOne = sspf(y,z1)
+    splitOne <- sspf(y,z1)
 
-    if(is.numeric(splitOne[1,1])==F){
+    if(is.numeric(splitOne[1,1]) == F){
 
-      allFactors = unique(z1)
+      allFactors <- unique(z1)
 
-      yz = z
+      yz <- z
 
-      yz$splitF = ifelse(z[,1]==splitOne[1,1],
+      yz$splitF <- ifelse(z[,1]==splitOne[1,1],
                          as.character(splitOne[1,1]),
                          paste(allFactors[allFactors!=splitOne[1,1]],collapse = ","))
 
-      yz = as.data.frame(cbind(yz[,-c(ncol(yz)-1)],z[,ncol(z)]))
-      colnames(yz)[ncol(yz)] = colnames(z)[2]
+      yz <- as.data.frame(cbind(yz[,-c(ncol(yz)-1)],z[,ncol(z)]))
+      colnames(yz)[ncol(yz)]  <- colnames(z)[2]
 
-      yz = list(base = yz,G = splitOne[1,2],splitVal = splitOne[1,1], variable = colnames(z)[1])
+      yz <- list(base = yz,G = splitOne[1,2],splitVal = splitOne[1,1], variable = colnames(z)[1])
 
 
     }else{
 
-      yz = z
+      yz <- z
 
-      yz$splitF = ifelse(z[,1]>=splitOne[1,1],
+      yz$splitF <- ifelse(z[,1]>=splitOne[1,1],
                          paste(colnames(z)[1],">=",splitOne[1,1]),
                          paste(colnames(z)[1],"<",splitOne[1,1]))
 
-      yz = as.data.frame(cbind(yz[,-c(ncol(yz)-1)],z[,ncol(z)]))
-      colnames(yz)[ncol(yz)] = colnames(z)[2]
+      yz <- as.data.frame(cbind(yz[,-c(ncol(yz)-1)],z[,ncol(z)]))
+      colnames(yz)[ncol(yz)] <- colnames(z)[2]
 
-      yz = list(base = yz,G = splitOne[1,2],splitVal = splitOne[1,1], colnames(z)[1])
+      yz <- list(base = yz,G = splitOne[1,2],splitVal = splitOne[1,1], colnames(z)[1])
 
 
     }

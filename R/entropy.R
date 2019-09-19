@@ -11,13 +11,13 @@
 #'
 #' @export
 entropy <- function(x) {
-  y = table(x)
-
-  yy = -(y / sum(y)) *
-    log2(y / sum(y)) -
-    (1 - (y / sum(y))) *
-    log2(1 -(y / sum(y)))
-
-  sum((y / sum(y)) * yy)
+  
+  y <- table(x)
+  
+  yy  <-  -(y / sum(y)) * log2(y / sum(y)) - (1 - (y / sum(y))) * log2(1 -(y / sum(y)))
+  
+  entropy <- sum((y / sum(y)) * yy)
+  
+  return(entropy)
 
 }

@@ -12,10 +12,12 @@
 #' @export
 gini <- function(x) {
 
-  y = table(x)
+  y <- table(x)
 
-  z = (y / sum(y)) ^ 2
+  z <- (y / sum(y)) ^ 2
 
-  1 - sum(z)
+  gini <- 1 - sum(z)
+  
+  return(gini)
 
 }

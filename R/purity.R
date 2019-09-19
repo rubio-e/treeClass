@@ -1,16 +1,8 @@
-#' purity function
-#'
-#' This function defines if a vector is pure
-#'
-#' @param x Factor vector
-#'
-#' @return character variable
-#'
-#' @examples
-#' purity(iris$Species)
-#'
-#' @export
+#' @keywords internal
 purity <- function(x) {
-  y = ifelse(length(unique(x)) == 1, "pure", "impure")
-  y
+  
+  y <- ifelse(length(unique(x)) == 1, "pure", "impure")
+  
+  return(y)
+  
 }
