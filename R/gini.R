@@ -11,7 +11,7 @@
 #'
 #' @export
 gini <- function(x) {
-
+  # This function directly computes the gini index formula
   y <- table(x)
 
   z <- (y / sum(y)) ^ 2

@@ -11,6 +11,7 @@
 #'
 #' @export
 entropy <- function(x) {
+  # This is uses directly the formula of the entropy
   
   y <- table(x)
   
