@@ -16,24 +16,24 @@ sspf <- function(y,x){
   # make a data.frame with both variables
   data <- data.frame(y = (y), x = (x))
   
-  # To ensure the same results NA values are omited in the data.frame
+  # To ensure the same results 'NA' values are omited in the data.frame
   data <- na.omit(data)
   
-  # After the database is clean is sorted by the independent variable
+  # After the database is cleaned is sorted by the independent variable
   data <- data[order(data$x),]
   
-  # Then the next is to decide if the predictor is numeric or not
+  # Then the next step is to decide if the predictor is numeric or not
   if(is.numeric(x) == F ){
     
     # if the data is not numeric it will select the unique elements of the factor vector
     x <- unique(data$x)
     
-    # The next is a for loop to make the binary splits
-    # it will loop over the length of the unique vectors
+    # The next step is to run a for loop to make the binary splits
+    # it will loop over the length of the new vector 'x'
     giniG <- data.frame()
 
     for (i in 1:length(x)) {
-      # this will separates the data into two: the diferent and the equal to the factor
+      # this will separates the data in two parts: the diferent and the equal to the subject factor 'i'
       left <- data[data[,2] ==  x[i],] 
       right <- data[data[,2] !=  x[i],]
       giniG[i,1] <- if(length(x)<3){ # this assigns the value of 1 if there is less than tree factors to avoid overfitting 

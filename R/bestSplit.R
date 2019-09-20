@@ -11,45 +11,60 @@
 #'
 #' @export
 bestSplit <- function(z){
+  
+  # This function depends on 'sspf' to select the best split of the data.base
 
-  y <- z[,ncol(z)]
+  y <- z[,ncol(z)] # Select only the column with the dependent variable
 
-  z1 <- z[,-ncol(z)]
-
+  z1 <- z[,-ncol(z)] # Select all the columns but the dependent variable
+  
+  # The next "if - else" condition is to loop over the columns only when the data.frame has more than two
+  # Otherwise a loop is not necessary
   if(ncol(z) > 2){
-
+    
+    # The next step is to create a data.frame and fill it with the sppf function
     bbs <- data.frame()
 
     for (i in 1:length(z1)) {
-      bbs[1,i] <- sspf(y,z1[,i])[2]
+      bbs[1,i] <- sspf(y,z1[,i])[2] # only extract the second value of the sspf result = GINI value
     }
 
-    colnames(bbs) <- names(z1)
+    colnames(bbs) <- names(z1) # naming the columns equal to the original database
 
-    bbs <- bbs[,order(bbs[1,])]
+    bbs <- bbs[,order(bbs[1,])] # sorting the data.frame by the lowest Gini value
 
-    name <- as.character(colnames(bbs)[1])
+    name <- as.character(colnames(bbs)[1]) # Making a vector with the name of the lowest Gini value column 
 
-    bbsa <- sspf(y,z1[,name])[1]
+    bbsa <- sspf(y,z1[,name])[1] # applying the sspf function to the column to get the split value for the specific column
 
-    yz <- data.frame(cbind(y,z1))
+    yz <- data.frame(cbind(y,z1)) # structuring the data.frame with the dependent variable as the first column
 
-    yz <- na.omit(yz)
-
-    if(is.numeric( bbsa[1,1]) ){
-
+    yz <- na.omit(yz) # To ensure the consistent results, this later can be modified to treat NA's differently
+    
+    # The next 'if else' condition is to determine if numeric or not
+    if(is.numeric(bbsa[1,1])){
+      
+      # This ifelse creates a new column called 'splitF' that will paste the name of the best split column
+      # the condition if it is < or >= to and the split value
+      # This will later serve to make the split in the same way for both numeric and vector variables
       yz$splitF <- ifelse(yz[,name] >= bbsa[1,1],
                          paste(name,">=",bbsa[1,1]),
                          paste(name,"<",bbsa[1,1]))
 
       colnames(yz)[1] <- colnames(z)[ncol(z)]
 
-      yz <- yz[,c(2:ncol(yz), 1)]
-
-      yz <- list(base = yz,G = bbs[1,1],splitVal = bbsa[1,1], variable = name)
-
+      yz <- yz[,c(2:ncol(yz), 1)] # Re-ordering the database
+      
+      # This makes the list with:
+      # The data.frame including the new column
+      # The gini value
+      # The split value
+      # The name of best split column
+      yz <- list(base = yz, G = bbs[1,1], splitVal = bbsa[1,1], variable = name)
 
     }else{
+      # If the best split is not numeric it will repeat the proccess using the factors
+      # It is, it will add the new column to the data.frame but using the factors way
       allFactors <- unique(yz[,name])
 
       yz$splitF <- ifelse(yz[,name] == bbsa[1,1],
@@ -66,6 +81,8 @@ bestSplit <- function(z){
 
 
   }else{
+    # This is the condition when the data frame only has one independent variable
+    # It repeat the above proccess but without the 'for loop'
 
     splitOne <- sspf(y,z1)
 

@@ -20,68 +20,75 @@
 #'
 #' @export
 treeCl <- function(formula, data, depth) {
-
+  
+  # This function is adapted to the data.tree package to show the results in a better way
+  # The next function will be used as a loop to build the tree
+  # This is made by recalling the function until the rules are met or until it reaches the
+  # desired depth
+  
   loopColsE <- function(node, formula, data, counter = 0) {
+    
+    # the node element belongs to the data.tree object
+    
+    node$cuenta <- counter + 1 # adds a counter to the loop
 
-    node$N <- nrow(data)
+    cuenta <- counter + 1 # this is later used to match the tree depth 
 
-    node$cuenta <- counter + 1
+    datax <- model.frame(formula, data = data) # this makes a model.frame based on the formula
 
-    cuenta <- counter + 1
+    datax <- data.frame(datax[,c(2:ncol(datax),1)]) # this will gives the data.frame structure to match the bestSplit function
 
-    datax <- model.frame(formula, data = data)
+    dataz <- bestSplit(datax) # Here initiates the spliting steps by selectin the best split column
 
-    datax <- data.frame(datax[,c(2:ncol(datax),1)])
+    dataa <- dataz[[1]] # This the first element of the list dataz is choosen, which corresponds to the data.frame of the list
 
-    dataz <- bestSplit(datax)
+    node$nElements <- nrow(dataa) # This will count the elements of the new data.frame and added to the tree node and output
 
-    dataa <- dataz[[1]]
+    x <- ncol(dataa) # this is to look for number of columns which in turn is corresponds to the localization of the dependent variable
 
-    node$nElements <- nrow(dataa)
+    if (purity(dataa[,x]) == 'pure') { # applies the purity function to the splitted data
+      
+      # if it is pure it will assing a child to the tree and make a leaf node
 
-    x <- ncol(dataa)
+      hijo <- node$AddChild(unique(dataa[, ncol(dataa)])) # add the child to the tree object
 
-    if (purity(dataa[,x]) == 'pure') {
+      hijo$nElements <- nrow(dataa) # counts the elements
 
-      hijo <- node$AddChild(unique(dataa[, ncol(dataa)]))
+      tabla <- table(dataa[,ncol(dataa)]) #!experimental: this counts the elements of the dependent variable
 
-      hijo$nElements <- nrow(dataa)
+    } else { # if the split is not pure then
+      
+      tabla <- table(dataa[,ncol(dataa)]) #!experimental: this counts the elements of the dependent variable
 
-      tabla <- table(dataa[,ncol(dataa)])
-
-      hijo$VarClass <- ''
-
-      cuent <- cuenta
-
-    } else {
-      tabla <- table(dataa[,ncol(dataa)])
-
-      nData <- split(dataa, dataa[,c("splitF")], drop = T)
+      nData <- split(dataa, dataa[,c("splitF")], drop = T) # split the data based on the factor column added
 
       for (i in 1:length(nData)) {
 
-        if(length(nData) < 1){
+        if(length(nData) < 1){ # this controls the loop to crash and add the number of elements
           
-          hijo <- node$AddChild(names(nData)[i])
+          hijo <- node$AddChild(names(nData)[i]) # add the name of the node in case of leaf
           
-          hijo <- node$AddChild(names(which.max(tabla)))
-          
-          hijo$nElements <- nrow(nData[[i]])
-          
-          break
-        }
-
-        if(nrow(nData[[i]]) <= 3){
-          
-          hijo <- node$AddChild(names(nData)[i])
-          
-          hijo <- node$AddChild(names(which.max(tabla)))
+          hijo <- node$AddChild(names(which.max(tabla))) #!experimental not used in print
           
           hijo$nElements <- nrow(nData[[i]])
           
           break
         }
 
+        if(nrow(nData[[i]]) <= 3){ # if the row is less than 3 the loop stops
+          
+          hijo <- node$AddChild(names(nData)[i])
+          
+          hijo <- node$AddChild(names(which.max(tabla))) #!experimental not used in print
+          
+          hijo$nElements <- nrow(nData[[i]])
+          
+          break
+        }
+        
+        # This is a conditional to deals with higly umbalanced datasets
+        # if one side of the data has more than 80 % the next split with the lowest gini is choosen
+        # it is almost experimental but works fine 
         if((tabla)[1]/sum(tabla) > 0.80 || (tabla)[2]/sum(tabla) > 0.80){
           
           hijo <- node$AddChild(names(which.max(tabla)))
@@ -92,7 +99,7 @@ treeCl <- function(formula, data, depth) {
         }
 
 
-        if(cuenta == depth){
+        if(cuenta == depth){ # this breaks the loop when it reaches the tree depth required
           
           hijo <- node$AddChild(names(which.max(tabla)))
           
@@ -101,21 +108,24 @@ treeCl <- function(formula, data, depth) {
           break
         }
 
-        hijo <- node$AddChild(names(nData)[i])
+        hijo <- node$AddChild(names(nData)[i]) # add the name in case of leaf
 
-        cuent <- cuenta
+        cuent <- cuenta # takes the loop sequence number
 
-        Recall(hijo, formula, nData[[i]],cuent)
+        Recall(hijo, formula, nData[[i]], cuent) # restart the general loop based on the split
 
       }
     }
   }
+  
+  # The next lines are used only to match the data.tree package requirements and print 
+  # the output in a more informative way.
 
-  tree <- Node$new("Root Node")
+  tree <- Node$new("Root Node") # This makes an element 
 
-  loopColsE(tree, formula, data)
+  loopColsE(tree, formula, data) # This will call the funtion 
 
-  print(tree,"nElements")
+  print(tree,"nElements") # This shows the output in the data.tree format
 
   return(tree)
 
