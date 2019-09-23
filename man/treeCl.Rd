@@ -7,11 +7,11 @@
 treeCl(formula, data, depth)
 }
 \arguments{
-\item{formula}{Formula to define the dependent and independent varibles}
+\item{formula}{Formula to define dependent and independent variables}
 
 \item{data}{database}
 
-\item{depth}{Numeric value to indicate the depth of the tree}
+\item{depth}{Numeric value to set the depth of a tree}
 }
 \value{
 tree object

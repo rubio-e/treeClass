@@ -1,6 +1,6 @@
 #' treeClass Package
 #'
-#' treeClass is a package for data classification based on GINI index.
+#' treeClass is a package for data classification based on Gini index.
 #'
 #' @docType package
 #'

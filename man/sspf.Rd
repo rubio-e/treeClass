@@ -9,13 +9,13 @@ sspf(y, x)
 \arguments{
 \item{y}{Factor vector}
 
-\item{x}{vector: it can be numeric, character or factor}
+\item{x}{vector: it can be numeric, a character or a factor}
 }
 \value{
 data.frame
 }
 \description{
-This function splits the independent variable and computes the weighted GINI index by selecting the lowest.
+This function splits the independent variable and computes the weighted Gini index by selecting the lowest one
 }
 \examples{
 sspf(iris$Species,iris$Sepal.Width)

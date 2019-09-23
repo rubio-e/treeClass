@@ -6,7 +6,7 @@
 \alias{treeClass-package}
 \title{treeClass Package}
 \description{
-treeClass is a package for data classification based on GINI index.
+treeClass is a package for data classification based on Gini index.
 }
 \author{
 Ernesto Rubio \email{ernestorub@gmail.com}

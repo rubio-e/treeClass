@@ -2,7 +2,7 @@
 % Please edit documentation in R/gini.R
 \name{gini}
 \alias{gini}
-\title{GINI index}
+\title{Gini index}
 \usage{
 gini(x)
 }
@@ -10,10 +10,10 @@ gini(x)
 \item{x}{Factor}
 }
 \value{
-Numeric variable.
+Numeric variable
 }
 \description{
-This function computes the GINI index.
+This function computes the Gini index.
 }
 \examples{
 gini(iris$Species)
